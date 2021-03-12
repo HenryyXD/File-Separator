@@ -26,14 +26,12 @@ public class FileSeparator {
         }
         
         for(File file : f.listFiles()){
-            if(file.isDirectory()){
-                continue;
+            if(!file.isDirectory()){
+                String fileType = getFileType(file.getName());
+                String newPath = dir + "\\" + fileType;
+                makeDir(newPath);
+                copyFile(file, new File(newPath + "\\" + file.getName()));
             }
-            
-            String fileType = getFileType(file.getName());
-            String newPath = dir + "\\" + fileType;
-            makeDir(newPath);
-            copyFile(file, new File(newPath + "\\" + file.getName()));
         }
     }
     
